@@ -1,1 +1,28 @@
-CI workflow
+name: PowerShell CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install PowerShell
+        run: sudo apt-get install -y powershell
+
+      - name: Script validation
+        run: |
+          pwsh -Command "Invoke-ScriptAnalyzer -Path ./scripts/*.ps1"
+
+      - name: Run Unit Tests
+        run: |
+          pwsh -Command "Invoke-Pester -Path ./tests"
