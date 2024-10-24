@@ -19,13 +19,16 @@ jobs:
       - name: Install PowerShell
         run: sudo apt-get install -y powershell
 
+      - name: List files in scripts directory
+        run: ls -l ./scripts
+
       - name: Script validation
         run: |
           pwsh -Command "Invoke-ScriptAnalyzer -Path ./scripts/*.ps1"
 
       - name: Run demo script
         run: |
-          pwsh -File ./scripts/demo.ps1
+          pwsh -File "./scripts/demo.ps1"
 
       - name: Run Unit Tests
         run: |
