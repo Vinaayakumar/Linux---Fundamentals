@@ -23,6 +23,10 @@ jobs:
         run: |
           pwsh -Command "Invoke-ScriptAnalyzer -Path ./scripts/*.ps1"
 
+      - name: Run demo script
+        run: |
+          pwsh -File ./scripts/demo.ps1
+
       - name: Run Unit Tests
         run: |
-          pwsh -Command "Invoke-Pester -Path ./tests"
+          pwsh -Command "Invoke-Pester -Path ./tests/*.Tests.ps1"
