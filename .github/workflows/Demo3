@@ -1,1 +1,27 @@
-CI workflow
+name: PowerShell CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PowerShell
+      uses: PowerShell/PowerShell@v1
+
+    - name: Validate PowerShell Script
+      run: pwsh -command "Test-ScriptFileInfo ./Demo.ps1"
+      
+    - name: Run PowerShell Script Tests
+      run: pwsh -command "./Demo.ps1"
+
